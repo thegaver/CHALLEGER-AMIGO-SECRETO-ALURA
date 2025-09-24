@@ -1,38 +1,41 @@
+//Creamos array para ingresar los nombres
 let participantes = [];
 
+//la función "agregarAmigo" guarda el nombre que escribo
 function agregarAmigo() {
-  let nombresAmigos = document.getElementById("amigo").value;
+  let nombre = document.getElementById("amigo").value;
 
-  if (nombresAmigos.trim() === "") {
-    alert("ingresa un nombre para añadir");
+  if (nombre === "") {
+    alert("Ingresa un nombre para añadir");
   } else {
-    participantes.push(nombresAmigos);
-    document.querySelector("#amigo").value = "";
+    participantes.push(nombre);
+    document.getElementById("amigo").value = "";
     agregarListaDeAmigos();
   }
 }
 
+//la función "agregarListaDeAmigos" muestra todos los nombres en la pantalla
 function agregarListaDeAmigos() {
-  let listaAmigos = document.querySelector("#listaAmigos");
-  listaAmigos.innerHTML = "";
+  let lista = document.getElementById("listaAmigos");
+  lista.innerHTML = "";
 
-  for (let index = 0; index < participantes.length; index++) {
-    const element = participantes[index];
-
-    let listaHTML = document.createElement("li");
-    listaHTML.textContent = element;
-    listaAmigos.appendChild(listaHTML);
+  for (let i = 0; i < participantes.length; i++) {
+    let li = document.createElement("li");
+    li.innerText = participantes[i];
+    lista.appendChild(li);
   }
 }
+
+//la función "sortearAmigo" agarra uno de esos nombres al azar para decir quién es el amigo secreto
 
 function sortearAmigo() {
-  let cantidadAmigos = participantes.length;
-  if (cantidadAmigos === 0) {
+  if (participantes.length === 0) {
     alert("Por favor ingresar un nombre para iniciar el juego");
   } else {
-    let indiceAmigo = Math.floor(Math.random() * cantidadAmigos);
-    let resultadoHTML = document.querySelector("#resultado");
-    resultadoHTML.innerHTML = `Tu amigo secreto es: ${participantes[indiceAmigo]}`;
+    let numero = Math.floor(Math.random() * participantes.length);
+    let resultado = document.getElementById("resultado");
+    resultado.innerText = "Tu amigo secreto es: " + participantes[numero];
   }
 }
+
 
